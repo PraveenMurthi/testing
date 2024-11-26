@@ -16,10 +16,10 @@ jobs:
     - name: Set up SSH
       run: |
         mkdir -p ~/.ssh
-        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_praveen
-        chmod 600 ~/.ssh/id_praveen  # Secure key permissions
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed2551
+        chmod 600 ~/.ssh/id_ed2551  # Secure key permissions
         eval "$(ssh-agent -s)"
-        ssh-add ~/.ssh/id_praveen
+        ssh-add ~/.ssh/id_ed2551
       shell: bash
 
     - name: Add server to known hosts
