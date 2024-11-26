@@ -16,7 +16,7 @@ jobs:
     - name: Set up SSH
       run: |
         mkdir -p ~/.ssh/
-        echo ${{ secrets.SSH_PRIVATE_KEY }} > ../id_praveen
+        echo ${{ secrets.SSH_PRIVATE_KEY }} > ./id_praveen
         chmod 600 ../id_praveen
         eval $(ssh-agent -s)
         ssh-add ../id_praveen
