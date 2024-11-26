@@ -11,16 +11,24 @@ jobs:
 
     steps:
     - name: Checkout the code
-      uses: actions/checkout@v3  # Updated to the latest stable version
+      uses: actions/checkout@v3
 
-    - name: Add server to known hosts
+    - name: Configure SSH key and configure agent
       run: |
         mkdir -p ~/.ssh
-        ssh-keyscan -H 74.225.252.178 >> ~/.ssh/id_praveen
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_praveen
+        chmod 600 ~/.ssh/id_praveen
+        eval "$(ssh-agent -s)"
+        ssh-add ~/.ssh/id_praveen
+      shell: bash
+      
+    - name: Add server to known hosts
+      run: |
+        ssh-keyscan -H 74.225.252.178 >> ~/.ssh/known_hosts
 
     - name: Deploy via SSH
       env:
         REMOTE_SERVER: "finkuser@74.225.252.178"
       run: |
         ssh -o StrictHostKeyChecking=no $REMOTE_SERVER "cd /home/finkuser/testing/testing/ && git pull origin main"
-        rm private_key 
+      shell: bash
