@@ -31,5 +31,5 @@ jobs:
       env:
         REMOTE_SERVER: "finkuser@74.225.252.178"
       run: |
-        ssh -o StrictHostKeyChecking=no $REMOTE_SERVER "cd /home/finkuser/testing && git pull origin main"
+        ssh StrictHostKeyChecking=no $REMOTE_SERVER "cd /home/finkuser/testing && git pull origin main"
       shell: bash
