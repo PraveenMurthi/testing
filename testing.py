@@ -1,5 +1,5 @@
 import time
 
 while True:
-    print("Hello, Praveen!")
+    print("Hello, World!")
     time.sleep(60) 
