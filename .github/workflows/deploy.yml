@@ -1,32 +1,35 @@
-name: Python CI
+name: Deploy to VM
 
 on:
   push:
     branches:
-      - main
-  pull_request:
-    branches:
-      - main
+      - main  # Ensure this matches your deployment branch
 
 jobs:
-  test:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+    - name: Checkout the code
+      uses: actions/checkout@v3
 
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.x'
-
-    - name: Install dependencies
+    - name: Set up SSH
       run: |
-        python -m pip install --upgrade pip
-        # Uncomment and customize if you have a specific requirements file
-        # pip install -r requirements.txt
+        mkdir -p ~/.ssh
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_praveen
+        chmod 600 ~/.ssh/id_praveen  # Secure key permissions
+        eval "$(ssh-agent -s)"
+        ssh-add ~/.ssh/id_praveen
+      shell: bash
 
-    - name: Run specific test file
+    - name: Add server to known hosts
       run: |
-        python /home/finkuser/testing
+        mkdir -p ~/.ssh  # Ensure directory exists
+        ssh-keyscan -H 74.225.252.178 >> ~/.ssh/known_hosts
+
+    - name: Deploy via SSH
+      env:
+        REMOTE_SERVER: "finkuser@74.225.252.178"
+      run: |
+        ssh -o StrictHostKeyChecking=no $REMOTE_SERVER "cd /home/finkuser/testing && git pull origin main"
+      shell: bash
