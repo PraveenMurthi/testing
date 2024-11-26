@@ -15,10 +15,11 @@ jobs:
 
     - name: Set up SSH
       run: |
-        echo ${{ secrets.SSH_PRIVATE_KEY }} > /home/finkuser/.ssh/id_praveen.pub
-        chmod 600 private_key.pub
+        mkdir -p ~/.ssh/
+        echo ${{ secrets.SSH_PRIVATE_KEY }} > ../id_praveen.pub
+        chmod 600 ../id_praveen.pub
         eval $(ssh-agent -s)
-        ssh-add private_key
+        ssh-add ../id_praveen.pub
       shell: bash
 
     - name: Add server to known hosts
