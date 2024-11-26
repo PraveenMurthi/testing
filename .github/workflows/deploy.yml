@@ -13,7 +13,7 @@ jobs:
     - name: Checkout the code
       uses: actions/checkout@v3
 
-    - name: Configure SSH key and configure agent
+    - name: Set up SSH
       run: |
         mkdir -p ~/.ssh
         echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_praveen
@@ -21,7 +21,7 @@ jobs:
         eval "$(ssh-agent -s)"
         ssh-add ~/.ssh/id_praveen
       shell: bash
-      
+
     - name: Add server to known hosts
       run: |
         ssh-keyscan -H 74.225.252.178 >> ~/.ssh/known_hosts
