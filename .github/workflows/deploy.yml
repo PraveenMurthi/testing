@@ -17,9 +17,9 @@ jobs:
       run: |
         mkdir -p ~/.ssh/
         echo ${{ secrets.SSH_PRIVATE_KEY }} > ./id_praveen
-        chmod 600 ../id_praveen
+        chmod 600 ./id_praveen
         eval $(ssh-agent -s)
-        ssh-add ../id_praveen
+        ssh-add ./id_praveen
       shell: bash
 
     - name: Add server to known hosts
