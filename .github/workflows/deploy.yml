@@ -3,7 +3,7 @@ name: Deploy to VM
 on:
   push:
     branches:
-      - main  # Ensure this matches your deployment branch
+      - main
 
 jobs:
   deploy:
@@ -16,20 +16,30 @@ jobs:
     - name: Set up SSH
       run: |
         mkdir -p ~/.ssh
-        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed2551
-        chmod 600 ~/.ssh/id_ed2551  # Secure key permissions
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_praveen
+        chmod 600 ~/.ssh/id_praveen
         eval "$(ssh-agent -s)"
-        ssh-add ~/.ssh/id_ed2551
+        ssh-add ~/.ssh/id_praveen
       shell: bash
 
     - name: Add server to known hosts
       run: |
-        mkdir -p ~/.ssh  # Ensure directory exists
+        mkdir -p ~/.ssh
         ssh-keyscan -H 74.225.252.178 >> ~/.ssh/known_hosts
+
+    - name: Check SSH Configuration and Remote
+      run: |
+        echo "SSH Private Key:"
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" | cut -c 1-20
+        echo "Remote Server: ${{ env.REMOTE_SERVER }}"
+        ssh -vT ${{ env.REMOTE_SERVER }}
+      env:
+        REMOTE_SERVER: "finkuser@74.225.252.178"
+      shell: bash
 
     - name: Deploy via SSH
       env:
         REMOTE_SERVER: "finkuser@74.225.252.178"
       run: |
-        ssh -o  StrictHostKeyChecking=no $REMOTE_SERVER "cd /home/finkuser/testing && git pull origin main"
+        ssh -o StrictHostKeyChecking=no $REMOTE_SERVER "cd /home/finkuser/testing && git pull origin main"
       shell: bash
