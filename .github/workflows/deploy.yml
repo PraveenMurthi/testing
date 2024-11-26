@@ -15,7 +15,7 @@ jobs:
 
     - name: Set up SSH
       run: |
-        private_kay = ${{ secrets.SSH_PRIVATE_KEY }}
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > private_key
         chmod 600 private_key.pub
         eval $(ssh-agent -s)
         ssh-add private_key
