@@ -15,7 +15,7 @@ jobs:
 
     - name: Set up SSH
       run: |
-        private_kay = cd ~/.ssh/id_ed25519.pub
+        private_kay = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICOeH5IWyF2GGm2HvgrPYEl9eg6NfnHtISB8XQ4n1VEc finkuser@core-backend-services
         chmod 600 private_key.pub
         eval $(ssh-agent -s)
         ssh-add private_key
