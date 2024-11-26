@@ -16,7 +16,7 @@ jobs:
     - name: Add server to known hosts
       run: |
         mkdir -p ~/.ssh
-        ssh-keyscan -H 74.225.252.178 >> ~/.ssh/known_hosts
+        ssh-keyscan -H 74.225.252.178 >> ~/.ssh/id_praveen
 
     - name: Deploy via SSH
       env:
