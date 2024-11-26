@@ -29,4 +29,4 @@ jobs:
 
     - name: Run specific test file
       run: |
-        python /home/finkuser/testing/testing.py
+        python /home/finkuser/testing
