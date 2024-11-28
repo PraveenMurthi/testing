@@ -8,4 +8,4 @@ WORKDIR /app
 COPY . .
 
 # Run the Python script when the container launches
-CMD ["python", "testing.py"]
+CMD ["python", "testing/testing.py"]
