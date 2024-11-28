@@ -49,4 +49,3 @@ jobs:
         docker build -t testing .
         docker run --name praveen /home/finkuser/testing .
         echo "Successfully started docker..."
-      shell: bash
