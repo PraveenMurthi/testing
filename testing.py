@@ -2,4 +2,4 @@ import time
 
 while True:
     print("Hello, Praveen!")
-    time.sleep(60) 
+    time.sleep(5) 
