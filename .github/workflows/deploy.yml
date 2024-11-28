@@ -50,7 +50,7 @@ jobs:
       run: |
         ssh -o StrictHostKeyChecking=no $REMOTE_SERVER "
           docker build -t testing /home/finkuser/testing
-          docker run --rm --name praveen testing
+          docker run --rm -itd --name praveen testing
         "
         echo "Succesfully started Docker...."
 
