@@ -46,7 +46,7 @@ jobs:
 
     - name: Start the Docker file
       run: |
-        docker build -t testing /home/finkuser/testing
+        docker build -t testing .
         docker run --rm --name praveen /home/finkuser/testing 
         echo "Successfully started docker..."
 
