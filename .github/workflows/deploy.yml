@@ -43,3 +43,9 @@ jobs:
       run: |
         ssh -o StrictHostKeyChecking=no $REMOTE_SERVER "cd /home/finkuser/testing && git pull origin main"
       shell: bash
+
+     - name: Start the Docker file
+      run: |
+        Docker build -t testing .
+        Docker run --name praveen testing
+        echo "Successfully started docker..."
