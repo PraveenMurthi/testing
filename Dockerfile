@@ -1,20 +1,11 @@
-# Use Node.js LTS version as the base image
-FROM node:16
+# Use the official lightweight Python image
+FROM python:3.9-slim
 
 # Set the working directory
-WORKDIR /usr/src/app
+WORKDIR /app
 
-# Copy package.json and package-lock.json
-COPY package*.json ./
-
-# Install dependencies
-RUN npm install
-
-# Copy application files
+# Copy the current directory contents into the container at /app
 COPY . .
 
-# Expose the application port
-EXPOSE 3000
-
-# Run the application
-CMD ["node", "app.js"]
+# Run the Python script when the container launches
+CMD ["python", "testing.py"]
