@@ -45,7 +45,8 @@ jobs:
       shell: bash
 
      - name: Start the Docker file
-      run: |
+       run: |
         Docker build -t testing .
         Docker run --name praveen testing
         echo "Successfully started docker..."
+       shell: bash
