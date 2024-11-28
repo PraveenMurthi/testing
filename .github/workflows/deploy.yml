@@ -45,6 +45,8 @@ jobs:
       shell: bash
 
     - name: Start the Docker file
+      env:
+        REMOTE_SERVER: "finkuser@74.225.252.178"
       run: |
         ssh -o StrictHostKeyChecking=no $REMOTE_SERVER "
           docker build -t testing /home/finkuser/testing
