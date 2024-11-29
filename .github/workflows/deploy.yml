@@ -47,4 +47,4 @@ jobs:
 
     - name: start jenkins deploy
       run: |
-        args: -X POST "http://74.225.252.178:8080/job/Testing pipeline/build?token=Secure_token"
+        args: -X POST "http://74.225.252.178:8080/job/Testing%20pipeline/build?token=Secure_token"
