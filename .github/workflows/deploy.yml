@@ -46,6 +46,5 @@ jobs:
       shell: bash
 
     - name: start jenkins deploy
-      uses: wei/curl@1.2.0
-      with:
+      run: |
         args: -X POST "http://74.225.252.178:8080/job/Testing pipeline/build?token=Secure_token"
