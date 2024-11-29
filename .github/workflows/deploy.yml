@@ -45,13 +45,7 @@ jobs:
         ssh -o StrictHostKeyChecking=no $REMOTE_SERVER "cd /home/finkuser/testing && git pull origin main"
       shell: bash
 
-    - name: Start the Docker file
-      env:
-        REMOTE_SERVER: "finkuser@74.225.252.178"
-      run: |
-        ssh -o StrictHostKeyChecking=no $REMOTE_SERVER "
-          docker build -t testing /home/finkuser/testing
-          docker run --rm -itd --name praveen testing
-        "
-        echo "Succesfully started Docker...."
-
+    - name: start jenkins deploy
+      uses: wei/curl@1.2.0\
+      with:
+        args: -X POST "http://74.225.252.178:8080/job/Testing pipeline/build?token=Secure_token"
