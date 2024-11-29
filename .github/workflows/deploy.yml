@@ -45,6 +45,6 @@ jobs:
         ssh -o StrictHostKeyChecking=no $REMOTE_SERVER "cd /home/finkuser/testing && git pull origin main"
       shell: bash
 
-    - name: start jenkins deploy
+    - name: Start Jenkins Deploy
       run: |
-        args: -X POST "http://74.225.252.178:8080/job/Testing%20pipeline/build?token=Secure_token"
+        curl -X POST "http://74.225.252.178:8080/job/Testing%20pipeline/build?token=Secure_token"
